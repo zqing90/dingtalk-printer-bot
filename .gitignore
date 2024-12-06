@@ -1,17 +1,12 @@
-.venv/
-.vscode
+/.venv
+/.vscode
 __pycache__
 
-# 忽略配置文件
-/app/config.py
-
 # 上传文件夹
-app/uploads/*
-!app/uploads/
+/app/uploads/*
 
 # 转换输出文件夹
-app/outputs/*
-!app/outputs/
+/app/outputs/*
 
 
 

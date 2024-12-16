@@ -16,4 +16,4 @@ if __name__ == '__main__':
     # stream_thread.start()
 
     # 启动 Flask 应用
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0')

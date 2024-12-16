@@ -2,6 +2,7 @@ import os
 import threading
 from flask import Blueprint, current_app, jsonify, request as flask_request
 from app.models.result import CommonResult
+from app.config import Config
 from app.utils.dingtalk.http import DingTak, SimpleText
 from app.utils.files.txt import TXTFile
 from app.utils.libreoffice.libreoffice import ConvertFile, FileType
@@ -61,6 +62,11 @@ def handle_text_message(data,sender_staff_id):
     txt_file = TXTFile(file_path)
     output_folder = os.path.join(current_app.root_path, 'outputs')
 
+    # 仅文本打印模式使用
+    font_path = os.path.join(current_app.root_path,'fonts',Config.FONT['font_path'])
+    font_size = Config.FONT['font_size']
+    font_name = Config.FONT['font_name']
+
     # 启动连续输入模式
     if content == '+++':
         set_cache_key(sender_staff_id, True)
@@ -72,6 +78,7 @@ def handle_text_message(data,sender_staff_id):
         
         # 判断文件类型
         file = ConvertFile(output_folder=output_folder,input_file_path=file_path)
+        file.set_font(font_name=font_name,font_path=font_path,font_size=font_size)
         result = file.convert_to_pdf(FileType.TXT)
         if result.status == False:
             result.message = f"[连续输入模式ERROR]:{result.message}"
@@ -109,6 +116,7 @@ def handle_text_message(data,sender_staff_id):
     
     # 判断文件类型
     file = ConvertFile(output_folder=output_folder,input_file_path=file_path)
+    file.set_font(font_name=font_name,font_path=font_path,font_size=font_size)
     result = file.convert_to_pdf(FileType.TXT)
     if result.status == False:
         result.message = f'[普通模式ERROR]:{result.message}'
@@ -196,7 +204,19 @@ def get_cache_key(cache_key):
     return g_cache.get(cache_key)
 
 
+@ding.route('/test', methods=['GET'])
+def test():
+    file_path = os.path.join(current_app.root_path, 'outputs', '1153490705886239.txt')
+    output_folder = os.path.join(current_app.root_path, 'outputs')
 
+    font_path = os.path.join(current_app.root_path,'fonts',Config.FONT['font_path'])
+    font_size = Config.FONT['font_size']
+    font_name = Config.FONT['font_name']
+    # 判断文件类型
+    file = ConvertFile(output_folder=output_folder,input_file_path=file_path)
+    file.set_font(font_name=font_name,font_path=font_path,font_size=font_size)
+    result = file.convert_to_pdf(FileType.TXT)
+    return jsonify(result.to_http_result().to_dict())
     
 
     

@@ -19,3 +19,8 @@ class Config:
         'DownloaFiledURL':'https://api.dingtalk.com/v1.0/robot/messageFiles/download',
         "SendMessageURL":'https://api.dingtalk.com/v1.0/robot/oToMessages/batchSend'
     }
+    FONT = {
+        "font_name":"SimSun", # 默认字体：宋体
+        "font_path":"SIMSUN.TTC", # 路径：app/fonts，可自行添加对应的字体
+        "font_size":16 # 默认字体14
+    }

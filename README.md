@@ -49,6 +49,7 @@
 ## 实现原理
 ### 1. 数据路径
 用户->钉钉->服务器（家里）->打印
+
 ![实现原理](doc/images/printer_bot_workflow.drawio.png)
 
 ### 2. 应用功能图
@@ -57,6 +58,7 @@
 3. **File Convert Service**:使用LibreOffice转换文件
 注：打印机只能打印pdf、图片、txt，Office文件需要进行文件转换
 应用功能图：
+
 ![应用功能图](doc/images/printer_bot_function.drawio.png)
 
 # 如何使用

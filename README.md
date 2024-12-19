@@ -94,6 +94,6 @@
 # RoadMap
 - [ ] 支持Windows打印，集成pyWin32
 - [ ] 增加定时删除文件（uploads、outputs)
-- [ ] 增加首页展示展示服务是否正常工作
+- [x] 增加首页展示展示服务是否正常工作
 - [ ] 增加钉钉Stream模式（无公网IP，更安全，更便捷）
 - [ ] dockerfile编写

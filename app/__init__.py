@@ -12,4 +12,7 @@ def create_app():
     from app.blueprints.dingtalk import ding
     app.register_blueprint(ding, url_prefix='/ding')
 
+    from app.blueprints.home import home
+    app.register_blueprint(home)
+
     return app

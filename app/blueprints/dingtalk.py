@@ -204,19 +204,19 @@ def get_cache_key(cache_key):
     return g_cache.get(cache_key)
 
 
-@ding.route('/test', methods=['GET'])
-def test():
-    file_path = os.path.join(current_app.root_path, 'outputs', '1153490705886239.txt')
-    output_folder = os.path.join(current_app.root_path, 'outputs')
+# @ding.route('/test', methods=['GET'])
+# def test():
+#     file_path = os.path.join(current_app.root_path, 'outputs', '1153490705886239.txt')
+#     output_folder = os.path.join(current_app.root_path, 'outputs')
 
-    font_path = os.path.join(current_app.root_path,'fonts',Config.FONT['font_path'])
-    font_size = Config.FONT['font_size']
-    font_name = Config.FONT['font_name']
-    # 判断文件类型
-    file = ConvertFile(output_folder=output_folder,input_file_path=file_path)
-    file.set_font(font_name=font_name,font_path=font_path,font_size=font_size)
-    result = file.convert_to_pdf(FileType.TXT)
-    return jsonify(result.to_http_result().to_dict())
+#     font_path = os.path.join(current_app.root_path,'fonts',Config.FONT['font_path'])
+#     font_size = Config.FONT['font_size']
+#     font_name = Config.FONT['font_name']
+#     # 判断文件类型
+#     file = ConvertFile(output_folder=output_folder,input_file_path=file_path)
+#     file.set_font(font_name=font_name,font_path=font_path,font_size=font_size)
+#     result = file.convert_to_pdf(FileType.TXT)
+#     return jsonify(result.to_http_result().to_dict())
     
 
     

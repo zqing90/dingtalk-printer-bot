@@ -15,4 +15,7 @@ def create_app():
     from app.blueprints.home import home
     app.register_blueprint(home)
 
+    from app.jobs.job_deletefiles import job_deletefiles
+    app.register_blueprint(job_deletefiles)
+
     return app

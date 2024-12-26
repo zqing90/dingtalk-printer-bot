@@ -63,8 +63,15 @@
                 <h1>钉钉打印机器人</h1>
             </div>
         </header>
-
+       
         <section class="content">
+            <article>
+                <h2>当前模式</h2>
+                <ul>
+                    <li><strong>模式:</strong> {{ ding["Mode"] }}</li>
+                    <li><strong>HTTP回调地址:</strong>http://youdomain:5000/ding/get-bot-msg</li>
+                </ul>
+            </article>
             <article>
                 <h2>打印机</h2>
                 <ul>

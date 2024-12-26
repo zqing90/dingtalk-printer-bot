@@ -180,8 +180,8 @@ class DingTak:
         
         
         if response.status_code == 200:
-            print(f"[Seed Message Error]:{response.json()}")
-            return CommonResult(status=False, message=f'[Seed Message Error]:{response.json()}')
+            print(f"发送消息成功:{data}")
+            return CommonResult(status=True)
         else:
             print(f"发送消息失败: {response.text}")
             return CommonResult(status=False, message=f'[Seed Message Error]:{response.status_code}')

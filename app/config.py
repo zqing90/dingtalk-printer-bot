@@ -12,9 +12,10 @@ class Config:
         "port": 631,
     }
     DING_TALK = {
-        'AgentId':'<your agentId>',
-        'AppKey':'<your appKey>',
-        'AppSecret':'<your appSecret>',
+        'Mode':'stream', # stream/http
+        'AgentId':'<your agentid>',
+        'AppKey':'<your appkey>',
+        'AppSecret':'<your appsecret>',
         'AccessTokenURL':'https://api.dingtalk.com/v1.0/oauth2/accessToken',
         'DownloaFiledURL':'https://api.dingtalk.com/v1.0/robot/messageFiles/download',
         "SendMessageURL":'https://api.dingtalk.com/v1.0/robot/oToMessages/batchSend'

@@ -4,6 +4,7 @@ from app.config import Config
 home= Blueprint('home', __name__)
 
 
+
 @home.route('/static/<path:filename>')
 def blueprint_static(filename):
     return send_from_directory(os.path.join(current_app.root_path,'static'), filename)

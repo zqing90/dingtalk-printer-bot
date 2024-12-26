@@ -1,5 +1,9 @@
 from flask import Flask
 from .config import Config
+import threading
+
+g_cache= {}
+g_cache_lock = threading.Lock()
 
 def create_app():
     app = Flask(__name__)
@@ -17,5 +21,10 @@ def create_app():
 
     from app.jobs.job_deletefiles import job_deletefiles
     app.register_blueprint(job_deletefiles)
+
+    # 使用stream模式时，注册stream
+    if Config.DING_TALK['Mode'] == 'stream':
+        from app.utils.dingtalk.stream import initialize_dingtalk_stream
+        initialize_dingtalk_stream()
 
     return app

@@ -14,3 +14,5 @@
  - AentId
  - Client ID (原 AppKey 和 SuiteKey)
  - Client Secret (原 AppSecret 和 SuiteSecret)
+ 6. 发布应用
+ ![发布应用](doc/images/dingapp-6.PNG)

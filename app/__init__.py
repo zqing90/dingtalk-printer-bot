@@ -25,6 +25,7 @@ def create_app():
     # 使用stream模式时，注册stream
     if Config.DING_TALK['Mode'] == 'stream':
         from app.utils.dingtalk.stream import initialize_dingtalk_stream
-        initialize_dingtalk_stream()
+        thread = threading.Thread(target=initialize_dingtalk_stream)
+        thread.start()  # 启动线程
 
     return app

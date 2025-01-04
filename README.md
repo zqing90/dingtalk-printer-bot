@@ -143,7 +143,7 @@ services:
       - ./uploads:/usr/src/app/app/uploads # 上传文件
       - ./outputs:/usr/src/app/app/outputs # 输出文件
     devices:
-      - /dev/bus/usb/003/009:/dev/bus/usb/003/009 # 挂载打印机设备（根据自己的情况而定） 
+      - /dev/bus/usb:/dev/bus/usb # 挂载USB 
 ```
 |类型| 参数 | 描述 |
 |:---|:---|:---|
@@ -153,16 +153,25 @@ services:
 |volume|cups|cups配置文件|
 |volume|uploads|上传文件夹，可选|
 |volume|outputs|输出文件夹，可选|
-|device|/dev/bus/usb/003/009|usb映射，根据自己设备而定|
+|device|/dev/bus/usb|挂载整个USB|
 
-如何查看自己的usb设备
+**问题：打印机自动关机后启动，无法打印，需要重启容器**
+**解决方案：利用udev检测打印机设备状态，自动重启容器**
 ```
-$ lsusb
-……
-Bus 002 Device 001: ID 1d6b:0002 xxxxx
-……
+# Step1：查看自己的打印机设备信息
+root@pve:/etc/udev/rules.d# lsusb
+Bus 003 Device 016: ID 04a9:1794 Canon, Inc. G3000 series
 
-#对应的usb设备为dev/bus/usb/003/001
+# Step2：创建udev规则文件
+root@pve:/etc/udev/rules.d# vim 99-printer.rules
+# 内容如下：自行替换打印机设备信息和容器名称
+# 04a9，1794为打印机设备信息
+# dingtalk-printer-bot 为容器名称
+ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ENV{ID_VENDOR_ID}=="04a9", ENV{ID_MODEL_ID}=="1794", RUN+="/usr/bin/docker restart dingtalk-printer-bot"
+
+# Step3：重载udev规则
+root@pve:/etc/udev/rules.d# udevadm control --reload-rules
+root@pve:/etc/udev/rules.d# udevadm trigger
 ```
 
 # RoadMap

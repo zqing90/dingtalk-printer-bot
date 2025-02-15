@@ -106,6 +106,8 @@ class DingTalkMessage:
             return CommonResult(status=True,message="[连续输入模式]取消成功！")
         
         txt_mode = self.cache.get_cache_key(sender_staff_id)
+        if txt_mode is None:
+            txt_mode = False
 
         # 连续模式输入
         if txt_mode == True:
